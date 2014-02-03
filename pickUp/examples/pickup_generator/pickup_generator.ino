@@ -67,16 +67,18 @@ buttonState = digitalRead(buttonPin);
 Serial.print("Read button state:");
 Serial.println(buttonState);
 
+char buffer1[128], buffer2[128];
+
 if (buttonState == HIGH)
 {
- randSeed(analogRead(A0));
- randNumber = random(0, 7);
- strcpy_P(buffer1, (char*) pgm_read_word(&(question_table[randNumber])));
+  randomSeed(analogRead(A0));
+  int randNumber = random(0, 7);
+  strcpy_P(buffer1, (char*) pgm_read_word(&(question_table[randNumber])));
   speakjet.print(buffer1);
   delay(3000);
   
-  randSeed(analogRead(A1));
-  randNumber2 = random (0, 7);
+  randomSeed(analogRead(A1));
+  int randNumber2 = random(0, 7);
   strcpy_P(buffer2, (char*)pgm_read_word(&(answer_table[randNumber2])));
   speakjet.print(buffer2);
   delay(3000);
